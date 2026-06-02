@@ -1,0 +1,1 @@
+- [Xyla Bot music fix](xyla-bot-music.md) — yt-dlp iOS client bypasses YouTube bot-detection; discord bot port 3999 not in Replit supported port list so workflow uses no waitForPort

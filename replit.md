@@ -1,44 +1,57 @@
-# [Project name]
+# Xyla Bot
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A full-featured Discord bot with music streaming, moderation, fun commands, giveaways, tickets, temp VCs, AFK, whitelist system, and much more.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/discord-bot run dev` — start the bot (workflow: **Xyla Bot**)
+- Workflow auto-restarts on code changes via the "Xyla Bot" workflow
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- discord.js v14, @discordjs/voice, play-dl, yt-dlp-exec
+- Flat-file JSON database (`bot-data.json`) — no PostgreSQL needed
+- Runtime: `tsx` (no build step)
+- yt-dlp binary: `/home/runner/workspace/.pythonlibs/bin/yt-dlp` (installed via pip)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+```
+artifacts/discord-bot/
+  src/
+    index.ts            — entry point, loads commands + events, health server on PORT 3999
+    client.ts           — BotClient (extends discord.js Client)
+    database.ts         — flat-file JSON DB helpers (bot-data.json)
+    commands/           — all command files (24 files)
+    events/             — event handlers (10 files)
+    music/              — MusicManager.ts (yt-dlp + ffmpeg audio pipeline)
+    utils/              — embeds.ts, helpers.ts, permissions.ts, state.ts, whitelist.ts
+```
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- **Flat-file DB**: All persistent data in `bot-data.json` (guilds, warnings, whitelist, music panels, etc.) — no DB provisioning needed.
+- **Prefix**: `!` for regular users. Bot owner (`1391063304419545128`) and staff skip prefix checks entirely.
+- **Music streaming**: yt-dlp → ffmpeg (raw PCM) → @discordjs/voice. yt-dlp uses iOS player client first to bypass YouTube bot-detection, with android_vr → tv_embedded → web_creator fallbacks.
+- **Per-guild bot avatar/banner**: `!setbotguildpfp` and `!setbotguildbanner` call `PATCH /guilds/{id}/members/@me` via Discord REST API directly (rate-limited by Discord — allow a few hours between changes).
+- **Preset avatar/banner** (`!setprepfp` / `!setprebanner`): Stores a URL in the DB for display in bot embeds — separate from the actual Discord guild avatar.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Xyla Bot features: music playback (YouTube + Spotify), full moderation suite, giveaways, ticket system, temp VCs, AFK tracking, bio system, NSFW commands, automod, welcome messages, fun/percentage/reaction GIFs, jail system, role management, whitelist anti-abuse, server stats, and owner-only admin controls.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Bot owner ID: `1391063304419545128`
+- Bot prefix: `!`
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- yt-dlp must be installed via pip — the binary path is `.pythonlibs/bin/yt-dlp`. If music breaks, run `pip install yt-dlp --upgrade`.
+- `ffmpeg-static` and `yt-dlp-exec` npm build scripts are blocked by pnpm by default — run `pnpm approve-builds` if reinstalling from scratch.
+- Discord rate-limits guild member avatar/banner changes (PATCH /guilds/{id}/members/@me) — only a few changes per hour are allowed.
+- The health server listens on port 3999 which is not in Replit's supported workflow port list, so the workflow is configured without `waitForPort` (console output type).
 
 ## Pointers
 
