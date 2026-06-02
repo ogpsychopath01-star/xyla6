@@ -30,6 +30,10 @@
     "1470676321083330604": {
       "granted_by": "1391063304419545128",
       "expires_at": 0
+    },
+    "1417897433840484464": {
+      "granted_by": "1391063304419545128",
+      "expires_at": 0
     }
   },
   "bot_roles": {},
@@ -42,29 +46,45 @@
         "last_join": 1780403291219
       },
       "1470676321083330604": {
-        "daily": 1290,
-        "weekly": 1290,
-        "alltime": 1290,
+        "daily": 2051,
+        "weekly": 2051,
+        "alltime": 2051,
         "last_join": 1780403449974
+      },
+      "1417897433840484464": {
+        "daily": 0,
+        "weekly": 0,
+        "alltime": 0,
+        "last_join": 1780403982498
       }
     }
   },
   "message_stats": {
     "1506712929209417868": {
       "1391063304419545128": {
-        "daily": 85,
-        "weekly": 85,
-        "alltime": 85
+        "daily": 120,
+        "weekly": 120,
+        "alltime": 120
       },
       "1470676321083330604": {
-        "daily": 57,
-        "weekly": 57,
-        "alltime": 57
+        "daily": 76,
+        "weekly": 76,
+        "alltime": 76
       },
       "1247420739083042826": {
         "daily": 14,
         "weekly": 14,
         "alltime": 14
+      },
+      "1417897433840484464": {
+        "daily": 13,
+        "weekly": 13,
+        "alltime": 13
+      },
+      "1327710404364992554": {
+        "daily": 1,
+        "weekly": 1,
+        "alltime": 1
       }
     }
   },
@@ -89,5 +109,6 @@
   "whitelist_punishment": {},
   "whitelist_log": {},
   "tts_user_langs": {},
-  "tts_guild_defaults": {}
+  "tts_guild_defaults": {},
+  "tts_user_slow": {}
 }

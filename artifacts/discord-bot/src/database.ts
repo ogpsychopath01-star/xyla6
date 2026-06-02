@@ -44,6 +44,7 @@ interface DbData {
   whitelist_log: Record<string, WhitelistLogEntry[]>;
   tts_user_langs: Record<string, string>;
   tts_guild_defaults: Record<string, string>;
+  tts_user_slow: Record<string, boolean>;
 }
 
 export interface WhitelistLogEntry {
@@ -111,6 +112,7 @@ let data: DbData = {
   whitelist_log: {},
   tts_user_langs: {},
   tts_guild_defaults: {},
+  tts_user_slow: {},
 };
 
 let saveTimeout: NodeJS.Timeout | null = null;
@@ -139,6 +141,7 @@ function load() {
       if (!data.whitelist_punishment) data.whitelist_punishment = {};
       if (!data.tts_user_langs) data.tts_user_langs = {};
       if (!data.tts_guild_defaults) data.tts_guild_defaults = {};
+      if (!data.tts_user_slow) data.tts_user_slow = {};
     }
   } catch { /* fresh start */ }
 }
@@ -777,6 +780,14 @@ export function getTTSGuildDefault(guildId: string): string | null {
 export function setTTSGuildDefault(guildId: string, lang: string) {
   if (!data.tts_guild_defaults) data.tts_guild_defaults = {};
   data.tts_guild_defaults[guildId] = lang;
+  save();
+}
+export function getTTSSlow(userId: string): boolean {
+  return data.tts_user_slow?.[userId] ?? false;
+}
+export function setTTSSlow(userId: string, value: boolean) {
+  if (!data.tts_user_slow) data.tts_user_slow = {};
+  data.tts_user_slow[userId] = value;
   save();
 }
 
