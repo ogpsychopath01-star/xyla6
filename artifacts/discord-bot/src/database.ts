@@ -42,6 +42,8 @@ interface DbData {
   whitelist_data: Record<string, Record<string, string[]>>;
   whitelist_punishment: Record<string, string>;
   whitelist_log: Record<string, WhitelistLogEntry[]>;
+  tts_user_langs: Record<string, string>;
+  tts_guild_defaults: Record<string, string>;
 }
 
 export interface WhitelistLogEntry {
@@ -107,6 +109,8 @@ let data: DbData = {
   whitelist_data: {},
   whitelist_punishment: {},
   whitelist_log: {},
+  tts_user_langs: {},
+  tts_guild_defaults: {},
 };
 
 let saveTimeout: NodeJS.Timeout | null = null;
@@ -133,6 +137,8 @@ function load() {
       if (!data.guild_pfps) data.guild_pfps = {};
       if (!data.whitelist_data) data.whitelist_data = {};
       if (!data.whitelist_punishment) data.whitelist_punishment = {};
+      if (!data.tts_user_langs) data.tts_user_langs = {};
+      if (!data.tts_guild_defaults) data.tts_guild_defaults = {};
     }
   } catch { /* fresh start */ }
 }
@@ -753,6 +759,24 @@ export function getWhitelistPunishment(guildId: string): string {
 
 export function setWhitelistPunishment(guildId: string, punishment: string) {
   data.whitelist_punishment[guildId] = punishment;
+  save();
+}
+
+// ── TTS LANGUAGE PREFERENCES ─────────────────────────────────────────────────
+export function getTTSLang(userId: string): string | null {
+  return data.tts_user_langs?.[userId] ?? null;
+}
+export function setTTSLang(userId: string, lang: string) {
+  if (!data.tts_user_langs) data.tts_user_langs = {};
+  data.tts_user_langs[userId] = lang;
+  save();
+}
+export function getTTSGuildDefault(guildId: string): string | null {
+  return data.tts_guild_defaults?.[guildId] ?? null;
+}
+export function setTTSGuildDefault(guildId: string, lang: string) {
+  if (!data.tts_guild_defaults) data.tts_guild_defaults = {};
+  data.tts_guild_defaults[guildId] = lang;
   save();
 }
 

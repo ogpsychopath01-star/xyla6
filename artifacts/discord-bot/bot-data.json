@@ -1,0 +1,93 @@
+{
+  "warnings": [
+    {
+      "id": 1,
+      "guild_id": "1506712929209417868",
+      "user_id": "1470676321083330604",
+      "reason": "Used `timeout` command without whitelist",
+      "moderator_id": "Bot Anti-Abuse",
+      "timestamp": 1780403530636
+    }
+  ],
+  "mutes": {},
+  "vc_bans": {},
+  "afk": {
+    "1247420739083042826": {
+      "reason": "jaa rha coaching ye log meri chat delete kr dete",
+      "timestamp": 1780403210782,
+      "dm_notifications": false
+    }
+  },
+  "guild_settings": {},
+  "log_settings": {},
+  "automod_settings": {},
+  "welcome_settings": {},
+  "leave_settings": {},
+  "tempvc_settings": {},
+  "active_tempvcs": {},
+  "nsfw_access": {},
+  "nopfx_access": {
+    "1470676321083330604": {
+      "granted_by": "1391063304419545128",
+      "expires_at": 0
+    }
+  },
+  "bot_roles": {},
+  "voice_stats": {
+    "1506712929209417868": {
+      "1391063304419545128": {
+        "daily": 1359,
+        "weekly": 1359,
+        "alltime": 1359,
+        "last_join": 1780403291219
+      },
+      "1470676321083330604": {
+        "daily": 1290,
+        "weekly": 1290,
+        "alltime": 1290,
+        "last_join": 1780403449974
+      }
+    }
+  },
+  "message_stats": {
+    "1506712929209417868": {
+      "1391063304419545128": {
+        "daily": 85,
+        "weekly": 85,
+        "alltime": 85
+      },
+      "1470676321083330604": {
+        "daily": 57,
+        "weekly": 57,
+        "alltime": 57
+      },
+      "1247420739083042826": {
+        "daily": 14,
+        "weekly": 14,
+        "alltime": 14
+      }
+    }
+  },
+  "bot_247": {},
+  "bios": {},
+  "giveaways": {},
+  "bot_config": {},
+  "ticket_settings": {},
+  "active_tickets": {},
+  "ticket_counter": {},
+  "autoresponder": {},
+  "autoreact": {},
+  "temp_roles": [],
+  "automod_whitelist": {},
+  "media_only_channels": {},
+  "jail_settings": {},
+  "jailed_users": {},
+  "guild_banners": {},
+  "guild_pfps": {},
+  "music_panels": {},
+  "whitelist_data": {},
+  "whitelist_punishment": {},
+  "whitelist_log": {},
+  "tts_user_langs": {},
+  "tts_guild_defaults": {}
+}

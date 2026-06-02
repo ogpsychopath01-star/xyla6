@@ -28,6 +28,7 @@ import serverCommands from './commands/server.js';
 import musicCommands from './commands/music.js';
 import lyricsCommands from './commands/lyrics.js';
 import whitelistCommands from './commands/whitelist.js';
+import ttsCommands from './commands/tts.js';
 
 // Events
 import registerReady from './events/ready.js';
@@ -68,6 +69,7 @@ const allCommands = [
   ...musicCommands,
   ...lyricsCommands,
   ...whitelistCommands,
+  ...ttsCommands,
 ];
 
 for (const command of allCommands) {
