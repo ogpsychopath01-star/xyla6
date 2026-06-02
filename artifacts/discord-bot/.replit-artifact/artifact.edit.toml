@@ -1,0 +1,12 @@
+kind = "api"
+previewPath = "/discord-bot"
+title = "Xyla Bot"
+version = "1.0.0"
+
+[[services]]
+localPort = 3999
+name = "Xyla Bot"
+paths = ["/discord-bot"]
+
+[services.development]
+run = "pnpm --filter @workspace/discord-bot run dev"
