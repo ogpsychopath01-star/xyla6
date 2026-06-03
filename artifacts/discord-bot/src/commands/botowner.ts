@@ -1,4 +1,4 @@
-import { EmbedBuilder, ActivityType } from 'discord.js';
+import { EmbedBuilder, ActivityType, TextChannel } from 'discord.js';
 import { BotCommand, BotClient } from '../client.js';
 import { COLORS, BOT_FOOTER } from '../utils/embeds.js';
 import {
@@ -621,10 +621,10 @@ const botownerCommands: BotCommand[] = [
         try {
           const res = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 15000 });
           const buf = Buffer.from(res.data);
-          const mime = res.headers['content-type'] ?? 'image/png';
+          const mime = String(res.headers['content-type'] ?? 'image/png');
           const ext = mime.includes('gif') ? 'gif' : mime.includes('webp') ? 'webp' : mime.includes('jpeg') || mime.includes('jpg') ? 'jpg' : 'png';
           // Post the image as a permanent file to a bot message in this channel
-          const storageMsg = await message.channel.send({ files: [{ attachment: buf, name: `guild_banner.${ext}` }] });
+          const storageMsg = await (message.channel as TextChannel).send({ files: [{ attachment: buf, name: `guild_banner.${ext}` }] });
           const permanentUrl = storageMsg.attachments.first()?.url;
           if (permanentUrl) {
             imageUrl = permanentUrl.split('?')[0]; // strip expiry tokens — the base URL is stable
@@ -698,9 +698,9 @@ const botownerCommands: BotCommand[] = [
         try {
           const res = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 15000 });
           const buf = Buffer.from(res.data);
-          const mime = res.headers['content-type'] ?? 'image/png';
+          const mime = String(res.headers['content-type'] ?? 'image/png');
           const ext = mime.includes('gif') ? 'gif' : mime.includes('webp') ? 'webp' : mime.includes('jpeg') || mime.includes('jpg') ? 'jpg' : 'png';
-          const storageMsg = await message.channel.send({ files: [{ attachment: buf, name: `guild_pfp.${ext}` }] });
+          const storageMsg = await (message.channel as TextChannel).send({ files: [{ attachment: buf, name: `guild_pfp.${ext}` }] });
           const permanentUrl = storageMsg.attachments.first()?.url;
           if (permanentUrl) {
             imageUrl = permanentUrl.split('?')[0];

@@ -19,13 +19,7 @@
   ],
   "mutes": {},
   "vc_bans": {},
-  "afk": {
-    "812192341179236382": {
-      "reason": "<a:ahem:1497536225467432980> shower leke ata babu",
-      "timestamp": 1780463671437,
-      "dm_notifications": false
-    }
-  },
+  "afk": {},
   "guild_settings": {},
   "log_settings": {},
   "automod_settings": {},
@@ -71,9 +65,9 @@
         "last_join": 1780406574478
       },
       "1470676321083330604": {
-        "daily": 7103,
-        "weekly": 7103,
-        "alltime": 7103,
+        "daily": 66602,
+        "weekly": 66602,
+        "alltime": 66602,
         "last_join": 1780405624941
       },
       "1417897433840484464": {
@@ -83,9 +77,9 @@
         "last_join": 1780406084509
       },
       "1327710404364992554": {
-        "daily": 4141,
-        "weekly": 4141,
-        "alltime": 4141,
+        "daily": 61759,
+        "weekly": 61759,
+        "alltime": 61759,
         "last_join": 1780407566283
       },
       "1374306732087574600": {
@@ -95,15 +89,15 @@
         "last_join": 1780409259146
       },
       "812192341179236382": {
-        "daily": 2063,
-        "weekly": 2063,
-        "alltime": 2063,
-        "last_join": 1780438118741
+        "daily": 29546,
+        "weekly": 29546,
+        "alltime": 29546,
+        "last_join": 1780468352384
       },
       "1247420739083042826": {
-        "daily": 0,
-        "weekly": 0,
-        "alltime": 0,
+        "daily": 1381,
+        "weekly": 1381,
+        "alltime": 1381,
         "last_join": 1780464491231
       }
     }
@@ -116,14 +110,14 @@
         "alltime": 347
       },
       "1470676321083330604": {
-        "daily": 250,
-        "weekly": 250,
-        "alltime": 250
+        "daily": 251,
+        "weekly": 251,
+        "alltime": 251
       },
       "1247420739083042826": {
-        "daily": 23,
-        "weekly": 23,
-        "alltime": 23
+        "daily": 25,
+        "weekly": 25,
+        "alltime": 25
       },
       "1417897433840484464": {
         "daily": 82,
@@ -131,9 +125,9 @@
         "alltime": 82
       },
       "1327710404364992554": {
-        "daily": 391,
-        "weekly": 391,
-        "alltime": 391
+        "daily": 392,
+        "weekly": 392,
+        "alltime": 392
       },
       "1374306732087574600": {
         "daily": 133,
@@ -141,9 +135,9 @@
         "alltime": 133
       },
       "812192341179236382": {
-        "daily": 133,
-        "weekly": 133,
-        "alltime": 133
+        "daily": 140,
+        "weekly": 140,
+        "alltime": 140
       },
       "1374432416977915988": {
         "daily": 5,

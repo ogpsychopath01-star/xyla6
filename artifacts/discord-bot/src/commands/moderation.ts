@@ -1,5 +1,5 @@
 import {
-  GuildMember, PermissionFlagsBits, EmbedBuilder
+  GuildMember, PermissionFlagsBits, EmbedBuilder, TextChannel, Collection, Message
 } from 'discord.js';
 import { BotCommand } from '../client.js';
 import { addWarning, getWarnings, removeWarnings, getGuildWarnings } from '../database.js';
@@ -404,22 +404,22 @@ const moderation: BotCommand[] = [
           const batchSize = Math.min(100, amount - deleted);
           const fetchOptions: any = { limit: batchSize };
           if (lastId) fetchOptions.before = lastId;
-          const fetched = await message.channel.messages.fetch(fetchOptions);
+          const fetched = await (message.channel as TextChannel).messages.fetch(fetchOptions) as unknown as Collection<string, Message<true>>;
           if (!fetched.size) break;
           lastId = fetched.last()?.id;
           let batch = [...fetched.values()];
           if (targetUser) batch = batch.filter(m => m.author.id === targetUser.id);
           if (!batch.length) { if (fetched.size < batchSize) break; continue; }
           const batchToDelete = batch.slice(0, amount - deleted);
-          const result = await (message.channel as any).bulkDelete(batchToDelete, true);
+          const result = await (message.channel as TextChannel).bulkDelete(batchToDelete, true);
           deleted += result.size;
           if (fetched.size < batchSize || result.size === 0) break;
           // Small delay to avoid hitting rate limits between batches
           if (deleted < amount) await new Promise(r => setTimeout(r, 1200));
         }
-        const reply = await message.channel.send({ embeds: [successEmbed('Messages Purged', `Deleted **${deleted}** message${deleted !== 1 ? 's' : ''}.`)] });
+        const reply = await (message.channel as TextChannel).send({ embeds: [successEmbed('Messages Purged', `Deleted **${deleted}** message${deleted !== 1 ? 's' : ''}.`)] });
         setTimeout(() => reply.delete().catch(() => {}), 4000);
-      } catch { await message.channel.send({ embeds: [errorEmbed('Purge Failed', 'Could not delete messages. Messages older than 14 days cannot be bulk deleted.')] }); }
+      } catch { await (message.channel as TextChannel).send({ embeds: [errorEmbed('Purge Failed', 'Could not delete messages. Messages older than 14 days cannot be bulk deleted.')] }); }
     }
   },
 

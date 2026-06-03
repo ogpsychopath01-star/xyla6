@@ -1,4 +1,5 @@
 import { Message, EmbedBuilder, PermissionFlagsBits, TextChannel } from 'discord.js';
+import type { ButtonBuilder } from 'discord.js';
 import { BotClient } from '../client.js';
 import { PREFIX, BOT_OWNER_ID, isBotOwner, isBotStaff } from '../utils/permissions.js';
 import {

@@ -68,7 +68,7 @@ const serverCommands: BotCommand[] = [
       try {
         await target.delete(`Nuked by ${message.author.tag}`);
       } catch {
-        return message.channel.send({ embeds: [errorEmbed('Failed', 'Could not delete the channel.')] }).catch(() => {});
+        return (message.channel as TextChannel).send({ embeds: [errorEmbed('Failed', 'Could not delete the channel.')] }).catch(() => {});
       }
 
       const newChannel = await message.guild!.channels.create({

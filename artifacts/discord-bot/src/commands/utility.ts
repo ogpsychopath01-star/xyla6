@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, TextChannel } from 'discord.js';
 import { BotCommand } from '../client.js';
 import { COLORS } from '../utils/embeds.js';
 import { getVoiceStats, getMessageStats, getAllVoiceStats, getAllMessageStats } from '../database.js';
@@ -376,7 +376,7 @@ const utilityCommands: BotCommand[] = [
         .setDescription(`**${question}**\n\nReact with ✅ for Yes or ❌ for No.`)
         .setFooter({ text: `Poll by ${message.author.tag}` })
         .setTimestamp();
-      const poll = await message.channel.send({ embeds: [embed] });
+      const poll = await (message.channel as TextChannel).send({ embeds: [embed] });
       await poll.react('✅');
       await poll.react('❌');
       await message.delete().catch(() => {});
@@ -404,7 +404,7 @@ const utilityCommands: BotCommand[] = [
             .setDescription(`You asked me to remind you:\n**${reminder}**\n\nSet in: **${message.guild?.name ?? 'DM'}**`)
             .setTimestamp()] });
         } catch {
-          await message.channel.send({ content: `<@${message.author.id}>`, embeds: [new EmbedBuilder()
+          await (message.channel as TextChannel).send({ content: `<@${message.author.id}>`, embeds: [new EmbedBuilder()
             .setColor(COLORS.warning).setTitle('⏰ Reminder!').setDescription(`**${reminder}**`).setTimestamp()] })
             .catch(() => {});
         }

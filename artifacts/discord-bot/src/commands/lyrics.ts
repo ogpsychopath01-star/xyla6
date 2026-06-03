@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, TextChannel } from 'discord.js';
 import { BotCommand } from '../client.js';
 import { COLORS, BOT_FOOTER } from '../utils/embeds.js';
 import { getPlayer } from '../music/MusicManager.js';
@@ -111,7 +111,7 @@ const lyricsCommands: BotCommand[] = [
       await loading.edit({ embeds: [makeEmbed(chunks[0], 1)] });
 
       for (let i = 1; i < totalPages; i++) {
-        await message.channel.send({ embeds: [makeEmbed(chunks[i], i + 1)] });
+        await (message.channel as TextChannel).send({ embeds: [makeEmbed(chunks[i], i + 1)] });
       }
     },
   },

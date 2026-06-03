@@ -328,7 +328,7 @@ export default function registerInteractionCreate(client: BotClient) {
             removeLikedSong(uid, t.url);
             await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x1DB954).setDescription(`💔 Removed **${t.title}** from liked songs.`).setFooter(BOT_FOOTER)] });
           } else {
-            addLikedSong(uid, { title: t.title, url: t.url, thumbnail: t.thumbnail, duration: t.duration, durationStr: t.durationStr, source: t.source });
+            addLikedSong(uid, { title: t.title, url: t.url, thumbnail: t.thumbnail, duration: t.duration, durationStr: t.durationStr, liked_at: Date.now() });
             await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x1DB954).setDescription(`❤️ Liked **${t.title}**!`).setFooter(BOT_FOOTER)] });
           }
           break;
@@ -400,7 +400,7 @@ export default function registerInteractionCreate(client: BotClient) {
         if (!query) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(COLORS.error).setDescription('❌ Empty search query.').setFooter(BOT_FOOTER)] });
 
         const player = getPlayer(guildId, interaction.client as any);
-        player.textChannelId = player.textChannelId || interaction.channelId;
+        player.textChannelId = player.textChannelId || (interaction.channelId ?? '');
 
         const botVC = interaction.guild?.members.me?.voice.channel;
         if (!botVC || botVC.id !== vc.id) player.connect(vc);

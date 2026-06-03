@@ -1,4 +1,4 @@
-import { EmbedBuilder, GuildMember } from 'discord.js';
+import { EmbedBuilder, GuildMember, TextChannel } from 'discord.js';
 import { BotCommand } from '../client.js';
 import { COLORS, BOT_FOOTER } from '../utils/embeds.js';
 import {
@@ -394,7 +394,7 @@ const musicCommands: BotCommand[] = [
         const filter = (m: any) => m.author.id === message.author.id &&
           (m.content === 'cancel' || (parseInt(m.content) >= 1 && parseInt(m.content) <= results.length));
 
-        const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30_000 });
+        const collected = await (message.channel as TextChannel).awaitMessages({ filter, max: 1, time: 30_000 });
         const resp = collected.first();
         if (!resp || resp.content === 'cancel') {
           await loading.edit({ embeds: [info('Search cancelled.')] });

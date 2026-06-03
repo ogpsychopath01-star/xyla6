@@ -21,7 +21,7 @@ export default function registerGuildMemberAdd(client: BotClient) {
 
     // ── ANTI-RAID ─────────────────────────────────────────────────────────
     const antiRaid = getAutomodSetting(guild.id, 'antiraid');
-    if (antiRaid?.enabled && handleAntiRaid(guild.id, member.id)) {
+    if (antiRaid?.enabled && handleAntiRaid(guild.id)) {
       await member.kick('Possible raid detected').catch(() => {});
       await sendLog(client, guild.id, 'antinuke', new EmbedBuilder()
         .setColor(COLORS.error).setTitle('🛡️ Anti-Raid Triggered')

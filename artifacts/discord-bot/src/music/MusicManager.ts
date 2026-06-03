@@ -8,7 +8,7 @@ import { promisify } from 'util';
 import type { ChildProcess } from 'child_process';
 import play from 'play-dl';
 import {
-  VoiceBasedChannel, EmbedBuilder, Client, TextBasedChannel,
+  VoiceBasedChannel, EmbedBuilder, Client, TextBasedChannel, TextChannel,
   ActionRowBuilder, ButtonBuilder, ButtonStyle,
 } from 'discord.js';
 import { COLORS, BOT_FOOTER } from '../utils/embeds.js';
@@ -374,7 +374,7 @@ export class GuildMusicPlayer {
     if (!this.textChannelId) return;
     try {
       const guild = this.client.guilds.cache.get(this.guildId);
-      const ch = guild?.channels.cache.get(this.textChannelId) as TextBasedChannel | undefined;
+      const ch = guild?.channels.cache.get(this.textChannelId) as TextChannel | undefined;
       await ch?.send({ embeds: [new EmbedBuilder().setColor(COLORS.warning).setDescription(msg).setFooter(BOT_FOOTER)] }).catch(() => {});
     } catch {}
   }
@@ -745,7 +745,7 @@ async function fetchSpotifyPlaylistTracks(playlistId: string, requestedBy: strin
   let url: string | null = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=50&fields=items(track(name,artists(name),duration_ms,album(images))),next`;
 
   while (url && spTracks.length < 100) {
-    const res = await axios.get<any>(url, { headers: { Authorization: `Bearer ${token}` }, timeout: 10000 });
+    const res: { data: any } = await axios.get<any>(url, { headers: { Authorization: `Bearer ${token}` }, timeout: 10000 });
     for (const item of res.data.items ?? []) {
       if (!item?.track?.name) continue;
       spTracks.push({
@@ -772,7 +772,7 @@ async function fetchSpotifyAlbumTracks(albumId: string, requestedBy: string): Pr
   const albumThumb = albumRes.data?.images?.[0]?.url ?? '';
 
   while (url && spTracks.length < 50) {
-    const res = await axios.get<any>(url, { headers: { Authorization: `Bearer ${token}` }, timeout: 10000 });
+    const res: { data: any } = await axios.get<any>(url, { headers: { Authorization: `Bearer ${token}` }, timeout: 10000 });
     for (const item of res.data.items ?? []) {
       if (!item?.name) continue;
       spTracks.push({

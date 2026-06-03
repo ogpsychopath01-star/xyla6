@@ -27,6 +27,7 @@ const muteCommands: BotCommand[] = [
       if (!mutedRole) {
         mutedRole = await message.guild!.roles.create({ name: 'Muted', color: 0x808080, reason: 'Bot mute role' });
         for (const [, channel] of message.guild!.channels.cache) {
+          if (!('permissionOverwrites' in channel)) continue;
           try {
             await channel.permissionOverwrites.create(mutedRole!, {
               SendMessages: false,
